@@ -33,12 +33,7 @@ jobs:
       - run:
           name: Execute API tests
           command: |
-            echo "Connecting to server at $SERVER_IP:$SERVER_PORT"
-            sleep 30
-            cd API/MockUser
-            echo "Current working directory: $(pwd)"
-            ls -la  # Verify the file is present in the current directory
-            npx mocha api.test.js --port $SERVER_PORT
+            npx mocha api.test.js --port 3000
           when: always
 
       - run:
