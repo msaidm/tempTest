@@ -28,16 +28,14 @@ jobs:
           name: Start Mock-User-Auth server
           background: true
           command: |
-            npm run dev &
+            npm run dev
+      - run:
+          name: Execute API tests
+          command: |
             sleep 10
+            ps aux
             npx mocha api.test.js
-
-      # - run:
-      #     name: Execute API tests
-      #     command: |
-      #       sleep 20
-      #       npx mocha api.test.js --port 3000
-      #     when: always
+          when: always
 
       - run:
           name: Generate HTML report
