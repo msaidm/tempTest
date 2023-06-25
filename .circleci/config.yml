@@ -28,15 +28,14 @@ jobs:
           name: Start Mock-User-Auth server
           background: true
           command: |
-            npm run dev
+            npm run dev 
+          
 
       - run:
           name: Execute API tests
           command: |
-           sleep 30
-           curl --retry 10 --retry-connrefused http://localhost:3000/api/v1/users
-           npx mocha api.test.js --endpoint http://localhost:3000
-          when: on_success
+            sleep 10
+            npx mocha api.test.js
 
       - run:
           name: Generate HTML report
