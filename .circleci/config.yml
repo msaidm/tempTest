@@ -1,66 +1,37 @@
 version: 2.1
-executors:
-  my-executor:
-    docker:
-      - image: cimg/node:lts-browsers
+
+orbs:
+  node: circleci/node@4.7
 
 jobs:
-  RunServerAPI:
-    executor: my-executor
-    # working_directory: ~/QA-Task/API/MockUser
-
+  build-and-test:
+    docker:
+      - image: cimg/node:16.10
     steps:
-      - checkout:
-          # path: ~/QA-Task
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
       - run:
-          name: "Install Mock-User-Auth and Supertest"
+          name: Install Mock-User-Auth and Supertest
           command: |
-            npm install mock-user-auth
-            npm install supertest --save-dev
-            npm install --save-dev mocha
-            npm install --save-dev mochawesome
-            npm install nodemon --save-dev
-            npm install --save-dev chai
-
+            npm install --save mock-user-auth
+            npm install --save-dev supertest mocha mochawesome
       - run:
-          name: "Start Mock-User-Auth server"
+          name: Start Mock-User-Auth server
           background: true
           command: |
-            sudo chmod +x node_modules/mock-user-auth/bin/www.js
             npm run dev
-
-  ExecuteAPI:
-    executor: my-executor
-    working_directory: ~/QA-Task/API/MockUser
-
-    environment:
-      SERVER_IP: $SERVER_IP
-      SERVER_PORT: $SERVER_PORT
-
-    steps:
-      - attach_workspace:
-          at: ~/QA-Task
       - run:
-          name: "Execute API tests"
+          name: Execute API tests
           command: |
-            echo "Connecting to server at $SERVER_IP:$SERVER_PORT"
-            sleep 30
-            cd API/MockUser
-            echo "Current working directory: $(pwd)"
-            ls -la  # Verify the file is present in the current directory
-            npx mocha api.test.js --port $SERVER_PORT
-          when: always
-      - store_artifacts:
-          path: API/MockUser/mochawesome-report/
+            npx mocha API/MockUser/api.test.js
+      - run:
+          name: Generate HTML report
+          command: |
+            npx mochawesome API/MockUser/api.test.js --reporter html
 
 workflows:
   version: 2
-  build-and-test:
+  sample:
     jobs:
-      - RunServerAPI:
-          name: RunServerAPI
-
-      - ExecuteAPI:
-          name: Execute API
-          requires:
-            - RunServerAPI
+      - build-and-test
