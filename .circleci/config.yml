@@ -26,9 +26,9 @@ jobs:
 
       - run:
           name: Start Mock-User-Auth server
-          background: true
+          # background: true
           command: |
-            sudo chmod +x node_modules/mock-user-auth/bin/www.js
+            # sudo chmod +x node_modules/mock-user-auth/bin/www.js
             npm run dev
             sleep 10
             npx mocha api.test.js
