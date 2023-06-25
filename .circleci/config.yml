@@ -31,10 +31,12 @@ jobs:
       - run:
           name: Execute API tests
           command: |
+            sleep 100
             npx mocha api.test.js
       - run:
           name: Generate HTML report
           command: |
+            sleep 100
             npx mochawesome api.test.js --reporter html
 
 workflows:
