@@ -26,6 +26,7 @@ jobs:
 
       - run:
           name: Start Mock-User-Auth server
+          background: true
           command: |
             npm run dev
       - run:
