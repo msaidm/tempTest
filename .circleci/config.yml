@@ -16,6 +16,8 @@ jobs:
           command: |
             npm install --save mock-user-auth
             npm install --save-dev supertest mocha mochawesome
+            npm install --save-dev chai
+
       - run:
           name: Start Mock-User-Auth server
           background: true
