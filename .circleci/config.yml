@@ -23,10 +23,13 @@ jobs:
           background: true
           command: |
             npm run dev
+            sleep 5 # Wait for the server to settle
+
       - run:
           name: Execute API tests
           command: |
             npx mocha api.test.js
+
       - run:
           name: Generate HTML report
           command: |
