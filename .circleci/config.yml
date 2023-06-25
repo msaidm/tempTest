@@ -24,6 +24,11 @@ jobs:
           command: |
             npm run dev 
           
+      - run:
+          name: Verify server is running
+          command: |
+            sleep 10
+            ps aux | grep "mock-user-auth/bin/www.js"
 
       - run:
           name: Execute API tests
