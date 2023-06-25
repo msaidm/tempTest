@@ -6,7 +6,7 @@ describe('API Routes', () => {
 
   // Test the CREATE USER route
   it('should create a new user', async () => {
-    const response = await request('http://localhost:6456')
+    const response = await request('http://localhost:3000')
       .post('/api/v1/users')
       .send({ name: 'mar', email: 'mar@gmail.com', password: '123' });
 
@@ -17,7 +17,7 @@ describe('API Routes', () => {
   });
   // Test the AUTHENTICATE USER route
   it('should authenticate a user and return a token', async () => {
-    const response = await request('http://localhost:6456')
+    const response = await request('http://localhost:3000')
       .post('/api/v1/auth')
       .send({ email: 'mar@gmail.com', password: '123' });
 
@@ -28,7 +28,7 @@ describe('API Routes', () => {
   
   // Test the GET USER route with authentication
   it('should get a user with authentication', async () => {
-    const response = await request('http://localhost:6456')
+    const response = await request('http://localhost:3000')
       .get('/api/v1/users')
       .set('Authorization', authToken );
 
@@ -42,7 +42,7 @@ describe('API Routes', () => {
   
     // Test the PATCH USER route with authentication
   it('should update a user with authentication', async () => {
-    const response = await request('http://localhost:6456')
+    const response = await request('http://localhost:3000')
       .patch('/api/v1/users')
       .set('Authorization', authToken)
       .send({ name: 'newName', email: 'new_email@gmail.com', password: 'newpassword123' });
@@ -53,7 +53,7 @@ describe('API Routes', () => {
 
   // Test the DELETE USER route with authentication
   it('should delete a user with authentication', async () => {
-    const response = await request('http://localhost:6456')
+    const response = await request('http://localhost:3000')
       .delete('/api/v1/users')
       .set('Authorization', authToken);
 
@@ -63,7 +63,7 @@ describe('API Routes', () => {
   
   // Test the DELETE ALL USERS route
   it('should delete all users', async () => {
-    const response = await request('http://localhost:6456')
+    const response = await request('http://localhost:3000')
       .delete('/api/v1/all-users')
       .send({ key_admin: 'keyadmin123' });
 
