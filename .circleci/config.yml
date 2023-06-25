@@ -34,7 +34,7 @@ jobs:
           name: Execute API tests
           command: |
            sleep 10
-           npx mocha api.test.js --endpoint http://localhost:3000
+           npx mocha api.test.js --endpoint http://localhost:3000 --timeout 5000
           when: on_success
 
       - run:
