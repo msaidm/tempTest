@@ -18,7 +18,7 @@ describe('API Routes', () => {
   // Test the AUTHENTICATE USER route
   it('should authenticate a user and return a token', async () => {
     const response = await request('http://localhost:3000')
-      .post('/api/v1/auth')
+      .post('api/v1/auth')
       .send({ email: 'mar@gmail.com', password: '123' });
 
     expect(response.status).to.equal(200);
