@@ -22,21 +22,14 @@ jobs:
           name: Start Mock-User-Auth server
           background: true
           command: |
-            echo "Starting Mock-User-Auth server"
-            npm run dev &
-            sleep 5 # Wait for the server to settle
-            echo "Mock-User-Auth server started"
-
+            nohup npm run dev & sleep 10
       - run:
           name: Execute API tests
           command: |
-            echo "Executing API tests"
             npx mocha api.test.js
-
       - run:
           name: Generate HTML report
           command: |
-            echo "Generating HTML report"
             npx mochawesome api.test.js --reporter html
 
 workflows:
