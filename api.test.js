@@ -8,7 +8,7 @@ describe('API Routes', () => {
   it('should create a new user', async () => {
     const response = await request('http://localhost:3000')
       .post('/api/v1/users')
-      .send({ name: 'mar', email: 'mar@gmail.com', password: '123' });
+      .send({ name: 'marr', email: 'marhy@gmail.com', password: '123' });
 
     expect(response.status).to.equal(200);
     expect(response.body).to.have.property('message', 'User registered with success');
@@ -19,7 +19,7 @@ describe('API Routes', () => {
   it('should authenticate a user and return a token', async () => {
     const response = await request('http://localhost:3000')
       .post('api/v1/auth')
-      .send({ email: 'mar@gmail.com', password: '123' });
+      .send({ email: 'marhy@gmail.com', password: '123' });
 
     expect(response.status).to.equal(200);
     expect(response.body).to.have.property('token');
