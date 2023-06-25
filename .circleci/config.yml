@@ -1,0 +1,43 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.7
+
+jobs:
+  build-and-test:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          name: Install Mock-User-Auth and Supertest
+          command: |
+            npm install --save mock-user-auth
+            npm install --save-dev supertest mocha mochawesome
+            npm install --save-dev chai
+
+      - run:
+          name: Start Mock-User-Auth server
+          background: true
+          command: |
+            npm run dev > server.log 2>&1 &
+            sleep 5
+            cat server.log
+
+      - run:
+          name: Execute API tests
+          command: |
+            npx mocha api.test.js
+
+      - run:
+          name: Generate HTML report
+          command: |
+            npx mochawesome api.test.js --reporter html
+
+workflows:
+  version: 2
+  sample:
+    jobs:
+      - build-and-test
