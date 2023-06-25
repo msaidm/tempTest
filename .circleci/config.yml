@@ -35,7 +35,7 @@ jobs:
           command: |
            sleep 30
            curl --retry 10 --retry-connrefused http://localhost:3000/api/v1/users
-           npx mocha api.test.js
+           npx mocha api.test.js --endpoint http://localhost:3000
           when: on_success
 
       - run:
