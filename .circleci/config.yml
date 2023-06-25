@@ -29,6 +29,7 @@ jobs:
           name: Execute API tests
           command: |
             npx mocha api.test.js
+          when: always
 
       - run:
           name: Generate HTML report
