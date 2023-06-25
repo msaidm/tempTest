@@ -18,7 +18,7 @@ describe('API Routes', () => {
   // Test the AUTHENTICATE USER route
   it('should authenticate a user and return a token', async () => {
     const response = await request('http://localhost:3000')
-      .post('/api/v1/auth')
+      .post('api/v1auth')
       .send({ email: 'mar@gmail.com', password: '123' });
 
     expect(response.status).to.equal(200);
@@ -29,7 +29,7 @@ describe('API Routes', () => {
   // Test the GET USER route with authentication
   it('should get a user with authentication', async () => {
     const response = await request('http://localhost:3000')
-      .get('/api/v1/users')
+      .get('api/v1/users')
       .set('Authorization', authToken );
 
     expect(response.status).to.equal(200);
@@ -37,13 +37,13 @@ describe('API Routes', () => {
     expect(response.body).to.have.property('name', 'mar');
     expect(response.body).to.have.property('email', 'mar@gmail.com');
     expect(response.body).to.have.property('password', '123');
-    expect(response.body).to.have.property('imageUrl', 'https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg');
+    expect(response.body).to.have.property('imageUrl', 'https:/almsaeedstudio.com/themesadminLTE/dist/img/user2-160x160.jpg');
   });
   
     // Test the PATCH USER route with authentication
   it('should update a user with authentication', async () => {
     const response = await request('http://localhost:3000')
-      .patch('/api/v1/users')
+      .patch('api/v1/users')
       .set('Authorization', authToken)
       .send({ name: 'newName', email: 'new_email@gmail.com', password: 'newpassword123' });
 
@@ -54,7 +54,7 @@ describe('API Routes', () => {
   // Test the DELETE USER route with authentication
   it('should delete a user with authentication', async () => {
     const response = await request('http://localhost:3000')
-      .delete('/api/v1/users')
+      .delete('api/v1/users')
       .set('Authorization', authToken);
 
     expect(response.status).to.equal(200);
@@ -64,7 +64,7 @@ describe('API Routes', () => {
   // Test the DELETE ALL USERS route
   it('should delete all users', async () => {
     const response = await request('http://localhost:3000')
-      .delete('/api/v1/all-users')
+      .delete('api/v1all-users')
       .send({ key_admin: 'keyadmin123' });
 
     expect(response.status).to.equal(200);
