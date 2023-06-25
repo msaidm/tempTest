@@ -28,6 +28,7 @@ jobs:
           name: Verify server is running
           command: |
             sleep 10
+            ls -la
             cat server.log
 
       - run:
