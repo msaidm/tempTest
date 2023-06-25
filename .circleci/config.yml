@@ -14,29 +14,22 @@ jobs:
       - run:
           name: Install Mock-User-Auth and Supertest
           command: |
-            npm install --save mock-user-auth
-            npm install --save-dev supertest mocha mochawesome
-            npm install --save-dev chai
+            npm install mock-user-auth
+            npm install supertest --save-dev
+            npm install --save-dev mocha
+            npm install --save-dev mochawesome
+            npm install nodemon --save-dev
 
       - run:
           name: Start Mock-User-Auth server
           background: true
           command: |
-            npm run dev > server.log 2>&1 &
-            sleep 5
-            cat server.log
-      - run:
-          name: Check if port 3000 is in use
-          command: |
-            if netstat -tuln | grep -q ":3000.*LISTEN"; then
-              echo "Port 3000 is already in use"
-              exit 1
-            fi
-
+            sudo chmod +x node_modules/mock-user-auth/bin/www.js
+            npm run dev
       - run:
           name: Execute API tests
           command: |
-            sleep 20
+            sleep 10
             npx mocha api.test.js
 
       - run:
