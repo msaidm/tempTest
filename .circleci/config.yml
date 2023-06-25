@@ -30,12 +30,15 @@ jobs:
           command: |
             sudo chmod +x node_modules/mock-user-auth/bin/www.js
             npm run dev
-      - run:
-          name: Execute API tests
-          command: |
-            sleep 20
-            npx mocha api.test.js --port 3000
-          when: always
+            sleep 10
+            npx mocha api.test.js
+
+      # - run:
+      #     name: Execute API tests
+      #     command: |
+      #       sleep 20
+      #       npx mocha api.test.js --port 3000
+      #     when: always
 
       - run:
           name: Generate HTML report
