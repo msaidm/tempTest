@@ -22,23 +22,22 @@ jobs:
           name: Start Mock-User-Auth server
           background: true
           command: |
-            npm run dev &
+            nohup npm run dev > server.log 2>&1 &
+
       - run:
           name: Verify server is running
           command: |
             sleep 10
-            ps aux | grep "mock-user-auth/bin/www.js"
+            cat server.log
+
       - run:
           name: Execute API tests
           command: |
-            sleep 20
-            ps aux
             npx mocha api.test.js
+
       - run:
           name: Generate HTML report
           command: |
-            sleep 20
-            ps aux
             npx mochawesome api.test.js --reporter html
 
 workflows:
