@@ -22,7 +22,11 @@ jobs:
           name: Start Mock-User-Auth server
           background: true
           command: |
-            nohup npm run dev & sleep 10
+            npm run dev &
+            SERVER_PID=$!
+            sleep 10
+            until curl -sSf http://127.0.0.1:5000 > /dev/null; do sleep 1; done
+            kill $SERVER_PID || true
       - run:
           name: Execute API tests
           command: |
