@@ -7,7 +7,7 @@ describe('API Routes', () => {
   // Test the CREATE USER route
   it('should create a new user', async () => {
     const response = await request('http://localhost:3000')
-      .post('api/v1/users')
+      .post('/api/v1/users')
       .send({ name: 'mar', email: 'mar@gmail.com', password: '123' });
 
     expect(response.status).to.equal(200);
