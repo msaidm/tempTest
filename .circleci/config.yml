@@ -33,6 +33,7 @@ jobs:
       - run:
           name: Execute API tests
           command: |
+            sleep 20
             npx mocha api.test.js --port 3000
           when: always
 
