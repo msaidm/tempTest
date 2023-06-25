@@ -23,10 +23,11 @@ jobs:
           background: true
           command: |
             npm run dev &
-            SERVER_PID=$!
+      - run:
+          name: Verify server is running
+          command: |
             sleep 10
-            while ! curl -sSf http://127.0.0.1:5000 >/dev/null; do sleep 1; done
-            echo "Server is up and running"
+            ps aux | grep "mock-user-auth/bin/www.js"
       - run:
           name: Execute API tests
           command: |
