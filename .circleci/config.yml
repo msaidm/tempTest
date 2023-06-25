@@ -24,11 +24,11 @@ jobs:
       - run:
           name: Execute API tests
           command: |
-            npx mocha API/MockUser/api.test.js
+            npx mocha api.test.js
       - run:
           name: Generate HTML report
           command: |
-            npx mochawesome API/MockUser/api.test.js --reporter html
+            npx mochawesome api.test.js --reporter html
 
 workflows:
   version: 2
