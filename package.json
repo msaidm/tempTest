@@ -1,0 +1,20 @@
+{
+  "name": "mockuser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter mochawesome api.test.js",
+    "dev": "nodemon ./node_modules/mock-user-auth/bin/www.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "supertest": "^6.3.3"
+  },
+  "dependencies": {
+    "mock-user-auth": "^1.0.15"
+  }
+}
