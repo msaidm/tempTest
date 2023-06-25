@@ -26,11 +26,11 @@ jobs:
 
       - run:
           name: Start Mock-User-Auth server
-          # background: true
+          background: true
           command: |
             npm run dev &
             sleep 10
-            npx mocha api.test.js
+            npx mocha api.test.js --timeout 10000 --exit
 
       # - run:
       #     name: Execute API tests
