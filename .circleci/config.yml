@@ -30,7 +30,7 @@ jobs:
           command: |
             npm run dev &
             sleep 10
-            npx mocha api.test.js --timeout 10000 --exit
+            npx mocha api.test.js
 
       # - run:
       #     name: Execute API tests
