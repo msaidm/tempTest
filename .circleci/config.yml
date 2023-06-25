@@ -22,18 +22,21 @@ jobs:
           name: Start Mock-User-Auth server
           background: true
           command: |
-            npm run dev 
-          
+            npm run dev > server.log 2>&1 &
+            sleep 5
+            cat server.log
       - run:
-          name: Verify server is running
+          name: Check if port 3000 is in use
           command: |
-            sleep 10
-            ps aux | grep "mock-user-auth/bin/www.js"
+            if lsof -Pi :3000 -sTCP:LISTEN -t > /dev/null ; then
+              echo "Port 3000 is already in use"
+              exit 1
+            fi
 
       - run:
           name: Execute API tests
           command: |
-            sleep 10
+            sleep 20
             npx mocha api.test.js
 
       - run:
